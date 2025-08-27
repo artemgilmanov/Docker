@@ -2,28 +2,49 @@
 
 ## Main Commands
 
-- `docker version` - shows Docker version information
-- `docker ps -a` - shows a list of running and stopped containers
-- `docker images` - shows list of local images
-- `docker run someImageName` - creates and runs a container
-- `docker run -it someImageName` - runs container with interactive terminal
-- `docker run -d someImageName` - creates and runs a container in background mode
-- `docker run -d --name someCustomName someImageName` - creates and runs a container with custom name
-- `docker stop someContainerIdOrName` - stops the container
-- `docker exec -it someContainerIdOrName someProcessName` - runs a command inside a running container
-- `docker container inspect someContainerId` - shows container details
-- `docker container inspect someContainerId | Select-String "IPAddress"` - shows only specified details (PowerShell specific)
-- `docker container prune` - removes all stopped containers
+- `docker version` - shows Docker version information.
+- `docker ps -a` - shows a list of all containers (running and stopped).
+- `docker images` - shows a list of local images.
+- `docker run someImageName` - creates and runs a new container from an image.
+- `docker run -it someImageName` - runs a container with an interactive terminal.
+- `docker run -d someImageName` - runs a container in detached (background) mode.
+- `docker run -d --name someCustomName someImageName` - creates and runs a container with a custom name.
+- `docker run -it --rm someImageName` - creates a temporary container that is automatically removed when it exits.
+- `docker stop someContainerIdOrName` - stops a running container.
+- `docker exec -it someContainerIdOrName someProcessName` - executes a command inside a running container (e.g., `/bin/bash`).
+- `docker container inspect someContainerIdOrName` - shows low-level details and configuration of a container in JSON format.
+- `docker container inspect someContainerId | Select-String "IPAddress"` - filters the inspect output to show only the IP address (PowerShell specific).
+- `docker container prune` - removes all stopped containers.
 
-## Main Commands inside Container
+## Port and Volume Mapping
 
-- `ls` - shows files and folders inside container
-- `ls -la` - shows files and folders including hidden ones
-- `hostname` - shows hostname/ID of the container
-- `hostname -i` - shows IP address
-- `ping someIpAddress` - check network connectivity to an IP address
-- `ping someDomainName` - check network connectivity to a domain
-- `exit` - exit the container shell
-- `cat someFileName.html` - display contents of an HTML file
+- `docker run -p hostPort:containerPort someImageName` - maps a port on the host machine to a port inside the container.
+- `docker run -v hostDirectory:containerDirectory someImageName` - mounts a host directory as a volume inside the container.
+  - `-v ${PWD}:containerDirectory` - uses the `PWD` (Print Working Directory) shell variable to mount the current directory.
 
-[Docker Hub](https://hub.docker.com/) - registry with collection of container images
+## Multi-Line Command Example
+
+Complex `docker run` commands can be broken into multiple lines for readability using the backslash (`\`) line continuation character.
+
+```bash
+docker run \
+--name my-nginx `# Assign a name to the container` \
+-v ${PWD}:/usr/share/nginx/html `# Mount the current directory to the Nginx web root` \
+-p 8080:80 `# Map host port 8080 to container port 80` \
+-d `# Run in detached mode` \
+--rm `# Remove the container when it exits` \
+nginx `# The Docker image to use`
+```
+
+## Useful Commands Inside a Container
+
+- `ls` - lists files and directories.
+- `ls -la` - lists all files and directories, including hidden ones.
+- `hostname` - shows the container's hostname (often the container ID).
+- `hostname -i` - shows the container's IP address.
+- `ping someIpAddress` - tests network connectivity to an IP address.
+- `ping someDomainName` - tests network connectivity to a domain name.
+- `exit` - exits the current shell session (may stop the container if it was started with `-it` and no main process is running).
+- `cat someFileName.html` - prints the contents of a file to the terminal.
+
+[Docker Hub](https://hub.docker.com/) - the default public registry for Docker images.

@@ -45,6 +45,21 @@ nginx `# The Docker image to use`
 - `ping someIpAddress` - tests network connectivity to an IP address.
 - `ping someDomainName` - tests network connectivity to a domain name.
 - `exit` - exits the current shell session (may stop the container if it was started with `-it` and no main process is running).
-- `cat someFileName.html` - prints the contents of a file to the terminal.
+- `cat someFileName.someExtension` - prints the contents of a file to the terminal.
+
+## Dockerfile
+
+```Dockerfile
+FROM python:alpine (Base Image name: Tag (version) of base Image)
+WORKDIR /app (Some documentation)
+COPY . . (Some documentation)
+CMD ["python", "main.py"] (Some documentation)
+```
+
+- `docker build .` - Builds an Image in Dockerfile.
+- `docker build . -t someImageName:someTag` - Builds an Image in Dockerfile with name and tag for image.
+- `docker build . -t someImageName` - Builds an Image in Dockerfile with name and tag will be added automatically by Docker.
+
+## Links
 
 [Docker Hub](https://hub.docker.com/) - the default public registry for Docker images.

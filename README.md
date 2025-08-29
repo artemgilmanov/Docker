@@ -3,6 +3,7 @@
 ## Main Commands
 
 - `docker version` - shows Docker version information.
+- `docker logs someImageName` - shows container logs .
 - `docker ps -a` - shows a list of all containers (running and stopped).
 - `docker images` - shows a list of local images.
 - `docker run someImageName` - creates and runs a new container from an image.
@@ -59,6 +60,14 @@ CMD ["python", "main.py"] (Some documentation)
 - `docker build .` - Builds an Image in Dockerfile.
 - `docker build . -t someImageName:someTag` - Builds an Image in Dockerfile with name and tag for image.
 - `docker build . -t someImageName` - Builds an Image in Dockerfile with name and tag will be added automatically by Docker.
+
+## Docker-compose up
+
+- `docker-compose up` - run docker compose file.
+- `docker-compose up -d` - run docker compose file in detached/background mode.
+- `docker-compose down` - stop and delete containers related to docker compose.
+
+- `docker-compose up -d --build` - some documentation.
 
 ## Links
 

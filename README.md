@@ -14,6 +14,7 @@
 - `docker stop someContainerIdOrName` - stops a running container.
 - `docker exec -it someContainerIdOrName someProcessName` - executes a command inside a running container (e.g., `/bin/bash`).
 - `docker container inspect someContainerIdOrName` - shows low-level details and configuration of a container in JSON format.
+- `docker inspect someContainerName` - shows details of a container in JSON format.
 - `docker container inspect someContainerId | Select-String "IPAddress"` - filters the inspect output to show only the IP address (PowerShell specific).
 - `docker container prune` - removes all stopped containers.
 

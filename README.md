@@ -13,6 +13,7 @@
 - `docker run -it --rm someImageName` - creates a temporary container that is automatically removed when it exits.
 - `docker stop someContainerIdOrName` - stops a running container.
 - `docker exec -it someContainerIdOrName someProcessName` - executes a command inside a running container (e.g., `/bin/bash`).
+- `touch someFileName.SomeExtension` - creates file insidecontainer.
 - `docker container inspect someContainerIdOrName` - shows low-level details and configuration of a container in JSON format.
 - `docker inspect someContainerName` - shows details of a container in JSON format.
 - `docker container inspect someContainerId | Select-String "IPAddress"` - filters the inspect output to show only the IP address (PowerShell specific).
